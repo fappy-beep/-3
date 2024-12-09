@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Покана за среща</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .no-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .yes-btn.grow {
+            font-size: 22px;
+            padding: 20px 30px;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Криси, искаш ли да излезеш на среща с мен този петък?</h1>
+        <div class="buttons">
+            <button class="yes-btn" id="yesBtn" onclick="yesResponse()">Да</button>
+            <button class="no-btn" id="noBtn" onclick="noResponse()">Не</button>
+        </div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        let yesButtonClickCount = 0; // Брояч за натисканията на бутон "Не"
+        let yesButtonClicked = false; // Проверка дали бутон "Да" е натиснат
+
+        function yesResponse() {
+            // Ако бутон "Да" е натиснат, показваме съобщението
+            if (!yesButtonClicked) {
+                yesButtonClicked = true;
+                document.getElementById("message").innerHTML = "Очаквам те в 19:00 пред вас!";
+            }
+        }
+
+        function noResponse() {
+            // Когато натиснем "Не", увеличаваме размера на бутона "Да"
+            if (!yesButtonClicked) { // Ако "Да" не е натиснат още
+                yesButtonClickCount++;
+
+                // Изчисляваме новия размер на бутона "Да"
+                const yesButton = document.getElementById("yesBtn");
+                const newSize = 18 + yesButtonClickCount * 2; // Увеличава размера с 2px за всяко натискане
+                yesButton.style.fontSize = newSize + "px";
+                yesButton.style.padding = (newSize / 1.5) + "px " + (newSize) + "px"; // Променя и padding-а
+            }
+        }
+    </script>
+</body>
+</html>
